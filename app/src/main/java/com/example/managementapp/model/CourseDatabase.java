@@ -5,15 +5,16 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
-import androidx.room.Entity;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.managementapp.model.dao.CategoryDAO;
 import com.example.managementapp.model.dao.CourseDAO;
+import com.example.managementapp.model.entity.Category;
+import com.example.managementapp.model.entity.Course;
 
-@Database(entities = {Course.class,Category.class},version = 1)
+@Database(entities = {Course.class, Category.class},version = 1)
 public abstract class CourseDatabase extends RoomDatabase {
     public abstract CategoryDAO categoryDAO();
     public abstract CourseDAO courseDAO();

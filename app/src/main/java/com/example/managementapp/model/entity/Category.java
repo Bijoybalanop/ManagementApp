@@ -1,4 +1,4 @@
-package com.example.managementapp.model;
+package com.example.managementapp.model.entity;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.library.baseAdapters.BR;

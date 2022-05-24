@@ -8,6 +8,8 @@ import androidx.lifecycle.LiveData;
 
 import com.example.managementapp.model.dao.CategoryDAO;
 import com.example.managementapp.model.dao.CourseDAO;
+import com.example.managementapp.model.entity.Category;
+import com.example.managementapp.model.entity.Course;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
