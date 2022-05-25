@@ -1,4 +1,4 @@
-package com.example.managementapp.model;
+package com.example.managementapp.repository;
 
 import android.app.Application;
 import android.os.Handler;
@@ -6,6 +6,7 @@ import android.os.Looper;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.managementapp.model.CourseDatabase;
 import com.example.managementapp.model.dao.CategoryDAO;
 import com.example.managementapp.model.dao.CourseDAO;
 import com.example.managementapp.model.entity.Category;

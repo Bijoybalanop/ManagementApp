@@ -1,13 +1,12 @@
 package com.example.managementapp.viewmodel;
 
 import android.app.Application;
-import android.icu.util.ULocale;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.managementapp.model.CourseShopRepository;
+import com.example.managementapp.repository.CourseShopRepository;
 import com.example.managementapp.model.entity.Category;
 import com.example.managementapp.model.entity.Course;
 
@@ -36,16 +35,17 @@ public class MainActivityViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Course>> getCoursesOfSelectedCategories(int categoryId) {
-        coursesOfSelectedCategories=repository.getCourses(categoryId);+
-
-
-
-
-
-
-
-
-
+        coursesOfSelectedCategories=repository.getCourses(categoryId);
         return coursesOfSelectedCategories;
+    }
+
+    public void addNewCourse(Course course){
+        repository.insertCourse(course);
+    }
+    public  void updateCourse(Course course){
+        repository.updateCourse(course);
+    }
+    public void deleteCourse(Course course){
+        repository.deleteCourse(course);
     }
 }
