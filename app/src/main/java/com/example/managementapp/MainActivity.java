@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.managementapp.databinding.ActivityMainBinding;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Category> categoryList;
     private ActivityMainBinding activityMainBinding;
     private MainActivityClickHandler clickHandler;
+    private Category selectedCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +43,14 @@ public class MainActivity extends AppCompatActivity {
         mainActivityViewModel.getAllCategories().observe(this, new Observer<List<Category>>() {
             @Override
             public void onChanged(List<Category> categories) {
+                categoryList=(ArrayList<Category>)  categories;
+
+
                 for (Category c:categories){
                     Log.i("TAG",c.getCategoryName());
                 }
+
+                showOnSpinner();
             }
         });
         mainActivityViewModel.getCoursesOfSelectedCategories(1).observe(this, new Observer<List<Course>>() {
@@ -55,12 +63,32 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void showOnSpinner() {
+        ArrayAdapter<Category> categoryArrayAdapter =new ArrayAdapter<>(
+                this,
+                R.layout.spinner_item,
+                categoryList
+        );
+        categoryArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+        activityMainBinding.setSpinnerAdapter(categoryArrayAdapter);
+
+    }
+
 
     public class MainActivityClickHandler{
 
         public void onFABClicked(View view){
 
             Toast.makeText(MainActivity.this, "FAB Clicked ", Toast.LENGTH_SHORT).show();
+        }
+
+        public void OnSelectedItem(AdapterView<?> parent,View view,int pos,long id){
+
+            selectedCategory=(Category) parent.getItemAtPosition(pos);
+             String message ="id is :"+selectedCategory.getCategoryId()+
+                     "\n name is"+selectedCategory.getCategoryName();
+            Toast.makeText(parent.getContext(), message, Toast.LENGTH_SHORT).show();
+
         }
 
 

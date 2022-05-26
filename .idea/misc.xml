@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/bijoy/AndroidStudioProjects/ManagementApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/bijoy/AndroidStudioProjects/ManagementApp/app/src/main/res/layout/content_main.xml" value="0.2598958333333333" />
+        <entry key="..\:/Users/bijoy/AndroidStudioProjects/ManagementApp/app/src/main/res/layout/spinner_item.xml" value="0.5" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>
