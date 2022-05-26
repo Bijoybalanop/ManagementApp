@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             selectedCategory=(Category) parent.getItemAtPosition(pos);
              String message ="id is :"+selectedCategory.getCategoryId()+
                      "\n name is"+selectedCategory.getCategoryName();
-            Toast.makeText(parent.getContext(), message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(parent.getContext(),""+message, Toast.LENGTH_SHORT).show();
 
         }
 
