@@ -85,4 +85,8 @@ public class Course extends BaseObservable {
         this.categoryId = categoryId;
         notifyPropertyChanged(BR.categoryId);
     }
+    @Override
+    public String toString() {
+        return this.courseName;
+    }
 }

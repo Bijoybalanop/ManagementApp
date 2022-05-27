@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="course"
+            type="com.example.managementapp.model.entity.Course" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/name_tv"
+            android:text="@{course.courseName}"
+            android:textSize="32dp"
+            android:textColor="@android:color/background_dark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/price_tv"
+            android:text="@{course.courseUnitPrice}"
+            android:textSize="24dp"
+            android:textColor="@android:color/background_dark" />
+
+    </LinearLayout>
+</layout>

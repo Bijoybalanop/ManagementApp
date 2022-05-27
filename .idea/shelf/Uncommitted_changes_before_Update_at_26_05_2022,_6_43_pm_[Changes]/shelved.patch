@@ -1,0 +1,140 @@
+Index: app/src/main/java/com/example/managementapp/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.managementapp;\n\nimport androidx.appcompat.app.AppCompatActivity;\nimport androidx.databinding.DataBindingUtil;\nimport androidx.lifecycle.Observer;\nimport androidx.lifecycle.ViewModelProvider;\nimport android.os.Bundle;\nimport android.util.Log;\nimport android.view.View;\nimport android.widget.Toast;\n\nimport com.example.managementapp.databinding.ActivityMainBinding;\nimport com.example.managementapp.databinding.ActivityMainBindingImpl;\nimport com.example.managementapp.model.entity.Category;\nimport com.example.managementapp.model.entity.Course;\nimport com.example.managementapp.viewmodel.MainActivityViewModel;\n\nimport java.util.ArrayList;\nimport java.util.List;\n\npublic class MainActivity extends AppCompatActivity {\n\n    private MainActivityViewModel mainActivityViewModel;\n    private ArrayList<Category> categoryList;\n    private ActivityMainBinding activityMainBinding;\n    private MainActivityClickHandler clickHandler;\n\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_main);\n        mainActivityViewModel= new ViewModelProvider(this).get(MainActivityViewModel.class);\n\n        activityMainBinding= DataBindingUtil.setContentView(this,R.layout.activity_main);\n        clickHandler=new MainActivityClickHandler();\n        activityMainBinding.setClickHandler(clickHandler);\n\n\n\n        mainActivityViewModel.getAllCategories().observe(this, new Observer<List<Category>>() {\n            @Override\n            public void onChanged(List<Category> categories) {\n                for (Category c:categories){\n                    Log.i(\"TAG\",c.getCategoryName());\n                }\n            }\n        });\n        mainActivityViewModel.getCoursesOfSelectedCategories(1).observe(this, new Observer<List<Course>>() {\n            @Override\n            public void onChanged(List<Course> courses) {\n                for(Course c:courses)\n                Log.i(\"TAG\",c.getCourseName());\n            }\n        });\n\n    }\n\n\n    public class MainActivityClickHandler{\n\n        public void onFABClicked(View view){\n\n            Toast.makeText(MainActivity.this, \"FAB Clicked \", Toast.LENGTH_SHORT).show();\n        }\n\n\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/managementapp/MainActivity.java b/app/src/main/java/com/example/managementapp/MainActivity.java
+--- a/app/src/main/java/com/example/managementapp/MainActivity.java	(revision 3da2ae34c36b9e1e4c472d14cc97b62ac9a97347)
++++ b/app/src/main/java/com/example/managementapp/MainActivity.java	(date 1653506840211)
+@@ -29,6 +29,7 @@
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main);
++
+         mainActivityViewModel= new ViewModelProvider(this).get(MainActivityViewModel.class);
+ 
+         activityMainBinding= DataBindingUtil.setContentView(this,R.layout.activity_main);
+Index: app/src/main/java/com/example/managementapp/repository/CourseShopRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.managementapp.repository;\n\nimport android.app.Application;\nimport android.os.Handler;\nimport android.os.Looper;\n\nimport androidx.lifecycle.LiveData;\n\nimport com.example.managementapp.model.CourseDatabase;\nimport com.example.managementapp.model.dao.CategoryDAO;\nimport com.example.managementapp.model.dao.CourseDAO;\nimport com.example.managementapp.model.entity.Category;\nimport com.example.managementapp.model.entity.Course;\n\nimport java.util.List;\nimport java.util.concurrent.ExecutorService;\nimport java.util.concurrent.Executors;\n\n\npublic class CourseShopRepository {\n    private CategoryDAO categoryDAO;\n    private CourseDAO courseDAO;\n\n    private LiveData<List<Category>> categories;\n    private LiveData<List<Course>> courses;\n\n    public CourseShopRepository(Application application) {\n        CourseDatabase courseDatabase = CourseDatabase.getInstance(application);\n        categoryDAO = courseDatabase.categoryDAO();\n        courseDAO = courseDatabase.courseDAO();\n    }\n    //Getters and setters\n\n\n    public LiveData<List<Category>> getCategories() {\n        return categoryDAO.getAllCategories();\n    }\n\n    public LiveData<List<Course>> getCourses(int CategoryId) {\n        return courseDAO.getCourses(CategoryId);\n    }\n\n    public void insertCategory(Category category) {\n        categoryDAO.insert(category);\n\n        ExecutorService executor = Executors.newSingleThreadExecutor();\n        Handler handler = new Handler(Looper.getMainLooper());\n        executor.execute(new Runnable() {\n            @Override\n            public void run() {\n                //inserting categories\n                categoryDAO.insert(category);\n            }\n        });\n    }\n\n    public void insertCourse(Course course) {\n        courseDAO.insert(course);\n        ExecutorService executor = Executors.newSingleThreadExecutor();\n        Handler handler = new Handler(Looper.getMainLooper());\n        executor.execute(new Runnable() {\n            @Override\n            public void run() {\n                //inserting categories\n                courseDAO.insert(course);\n            }\n        });\n    }\n\n    public void deleteCategory(Category category) {\n        ExecutorService executor = Executors.newSingleThreadExecutor();\n        Handler handler = new Handler(Looper.getMainLooper());\n        executor.execute(new Runnable() {\n            @Override\n            public void run() {\n                //inserting categories\n                categoryDAO.delete(category);\n            }\n        });\n\n    }\n\n    public void deleteCourse(Course course) {\n        ExecutorService executor = Executors.newSingleThreadExecutor();\n        Handler handler = new Handler(Looper.getMainLooper());\n        executor.execute(new Runnable() {\n            @Override\n            public void run() {\n                //inserting categories\n                courseDAO.delete(course);\n            }\n        });\n    }\n\n    public void updateCategory(Category category) {\n        ExecutorService executor = Executors.newSingleThreadExecutor();\n        Handler handler = new Handler(Looper.getMainLooper());\n        executor.execute(new Runnable() {\n            @Override\n            public void run() {\n                //inserting categories\n                categoryDAO.update(category);\n            }\n        });\n\n    }\n\n    public void updateCourse(Course course) {\n\n        ExecutorService executor = Executors.newSingleThreadExecutor();\n        Handler handler = new Handler(Looper.getMainLooper());\n        executor.execute(new Runnable() {\n            @Override\n            public void run() {\n                //inserting categories\n                courseDAO.update(course);\n            }\n        });\n\n    }\n\n\n}\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/managementapp/repository/CourseShopRepository.java b/app/src/main/java/com/example/managementapp/repository/CourseShopRepository.java
+--- a/app/src/main/java/com/example/managementapp/repository/CourseShopRepository.java	(revision 3da2ae34c36b9e1e4c472d14cc97b62ac9a97347)
++++ b/app/src/main/java/com/example/managementapp/repository/CourseShopRepository.java	(date 1653507693989)
+@@ -42,7 +42,6 @@
+ 
+     public void insertCategory(Category category) {
+         categoryDAO.insert(category);
+-
+         ExecutorService executor = Executors.newSingleThreadExecutor();
+         Handler handler = new Handler(Looper.getMainLooper());
+         executor.execute(new Runnable() {
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+new file mode 100644
+--- /dev/null	(date 1653506877492)
++++ b/.idea/gradle.xml	(date 1653506877492)
+@@ -0,0 +1,19 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
++  <component name="GradleSettings">
++    <option name="linkedExternalProjectsSettings">
++      <GradleProjectSettings>
++        <option name="testRunner" value="GRADLE" />
++        <option name="distributionType" value="DEFAULT_WRAPPED" />
++        <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="modules">
++          <set>
++            <option value="$PROJECT_DIR$" />
++            <option value="$PROJECT_DIR$/app" />
++          </set>
++        </option>
++      </GradleProjectSettings>
++    </option>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1653506840180)
++++ b/.idea/misc.xml	(date 1653506840180)
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="DesignSurface">
++    <option name="filePathToZoomLevelMap">
++      <map>
++        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1078125" />
++      </map>
++    </option>
++  </component>
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/build/classes" />
++  </component>
++  <component name="ProjectType">
++    <option name="id" value="Android" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+new file mode 100644
+--- /dev/null	(date 1653506887415)
++++ b/.idea/compiler.xml	(date 1653506887415)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <bytecodeTargetLevel target="11" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1653506542764)
++++ b/.idea/vcs.xml	(date 1653506542764)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/.name
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.name b/.idea/.name
+new file mode 100644
+--- /dev/null	(date 1653322678461)
++++ b/.idea/.name	(date 1653322678461)
+@@ -0,0 +1,1 @@
++ManagementApp
+\ No newline at end of file

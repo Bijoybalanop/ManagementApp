@@ -3,12 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/bijoy/AndroidStudioProjects/ManagementApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/bijoy/AndroidStudioProjects/ManagementApp/app/src/main/res/layout/content_main.xml" value="0.2598958333333333" />
-        <entry key="..\:/Users/bijoy/AndroidStudioProjects/ManagementApp/app/src/main/res/layout/spinner_item.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.28985900878906246" />
+        <entry key="app/src/main/res/layout/content_backup.xml" value="0.2520833333333333" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.24583333333333332" />
+        <entry key="app/src/main/res/layout/course_list_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/spinner_item.xml" value="0.1078125" />
+        <entry key="app/src/main/res/layout/spinner_item_2.xml" value="0.2520833333333333" />
+        <entry key="app/src/main/res/layout/spinner_item_backup.xml" value="0.25104166666666666" />
+        <entry key="app/src/main/res/layout/spinner_item_main.xml" value="0.11145833333333334" />
       </map>
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
 </project>

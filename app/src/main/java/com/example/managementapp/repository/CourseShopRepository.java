@@ -36,13 +36,16 @@ public class CourseShopRepository {
         return categoryDAO.getAllCategories();
     }
 
+    public LiveData<List<Course>> getCourses(){
+        return courseDAO.getAllCourses();
+    }
+
     public LiveData<List<Course>> getCourses(int CategoryId) {
         return courseDAO.getCourses(CategoryId);
     }
 
     public void insertCategory(Category category) {
         categoryDAO.insert(category);
-
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
         executor.execute(new Runnable() {

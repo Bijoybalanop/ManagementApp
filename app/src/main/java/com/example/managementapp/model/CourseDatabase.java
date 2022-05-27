@@ -62,8 +62,13 @@ public abstract class CourseDatabase extends RoomDatabase {
                 category2.setCategoryName("BackEnd");
                 category2.setCategoryDescription("Database");
 
+                Category category3 =new Category();
+                category3.setCategoryName("Multimedia");
+                category3.setCategoryDescription("Database");
+
                 categoryDAO.insert(category1);
                 categoryDAO.insert(category2);
+                categoryDAO.insert(category3);
 
                 //Couse
                 Course course1=new Course();
