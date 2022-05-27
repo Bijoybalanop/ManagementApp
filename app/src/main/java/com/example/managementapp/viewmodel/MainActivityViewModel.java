@@ -20,6 +20,7 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     //Live Data
     private LiveData<List<Category>> allCategories;
+    private LiveData<List<Course>> allCourses;
     private LiveData<List<Course>> coursesOfSelectedCategories;
 
 
@@ -34,6 +35,11 @@ public class MainActivityViewModel extends AndroidViewModel {
         return allCategories;
     }
 
+    public LiveData<List<Course>> getAllCourses(){
+        allCourses=repository.getCourses();
+        return allCourses;
+    }
+
     public LiveData<List<Course>> getCoursesOfSelectedCategories(int categoryId) {
         coursesOfSelectedCategories=repository.getCourses(categoryId);
         return coursesOfSelectedCategories;
@@ -43,6 +49,7 @@ public class MainActivityViewModel extends AndroidViewModel {
         repository.insertCourse(course);
     }
     public  void updateCourse(Course course){
+
         repository.updateCourse(course);
     }
     public void deleteCourse(Course course){

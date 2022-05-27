@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="secondSpinnerAdapter"
-            type="android.widget.ArrayAdapter" />
+            name="thirdSpinnerAdapter"
+            type="android.widget.ArrayAdapter"/>
         <variable
             name="clickHandler"
             type="com.example.managementapp.MainActivity.MainActivityClickHandler" />
@@ -24,8 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            app:adapter="@{secondSpinnerAdapter}"
-            android:onItemSelected="@{clickHandler::OnSelectedItemsMainSpinner}" />
+            app:adapter="@{thirdSpinnerAdapter}"
+            android:onItemSelected="@{clickHandler::OnSelectedItemsBackUpSpinner}" />
 
     </LinearLayout>
 </layout>
